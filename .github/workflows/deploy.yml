@@ -35,10 +35,34 @@ jobs:
   test:
     needs: lint
     runs-on: ubuntu-latest
-    env:
-      SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_DB: uploading_files_db
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     steps:
       - uses: actions/checkout@v4
+
+      - name: Create .env file
+        run: |
+          cat > .env <<EOF
+          SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }}
+          DEBUG=False
+          DB_NAME=uploading_files_db
+          DB_USER=postgres
+          DB_PASSWORD=postgres
+          DB_HOST=localhost
+          DB_PORT=5432
+          EOF
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -53,25 +77,13 @@ jobs:
         run: |
           poetry install --no-root
 
+      - name: Run migrations
+        run: |
+          poetry run python manage.py migrate
+
       - name: Run backend tests
         run: |
           poetry run pytest users/tests.py -v
-
-  build:
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Build Docker image (dry-run or local build)
-        run: |
-          docker-compose config
-          echo "✅ Docker Compose configuration is valid"
-          # Опционально: можно собрать образ локально для проверки
-          # docker-compose build
 
   deploy:
     needs: build
