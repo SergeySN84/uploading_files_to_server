@@ -85,6 +85,22 @@ jobs:
         run: |
           poetry run pytest users/tests.py -v
 
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build Docker image (dry-run or local build)
+        run: |
+          docker-compose config
+          echo "✅ Docker Compose configuration is valid"
+          # Опционально: можно собрать образ локально для проверки
+          # docker-compose build
+
   deploy:
     needs: build
     runs-on: ubuntu-latest
