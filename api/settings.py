@@ -94,7 +94,7 @@ WSGI_APPLICATION = "api.wsgi.application"
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
 # Определяем, запущены ли тесты
-TESTING = 'pytest' in sys.modules or 'test' in sys.argv
+TESTING = "pytest" in sys.modules or "test" in sys.argv
 
 if TESTING:
     # Используем SQLite для тестов — быстро и без зависимостей
