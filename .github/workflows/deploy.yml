@@ -80,6 +80,15 @@ jobs:
       - name: Run migrations
         run: |
           poetry run python manage.py migrate
+        env:
+          SECRET_KEY: 'django-insecure-qj$e77!j2km6av)6k+gmi!_#+##zj(ju7pjfe58jf^s%8o8q-n'
+          DEBUG: "False"
+          ALLOWED_HOSTS: "localhost,127.0.0.1"
+          DB_NAME: uploading_files_db
+          DB_USER: postgres
+          DB_PASSWORD: postgres
+          DB_HOST: localhost
+          DB_PORT: 5432
 
       - name: Run backend tests
         run: |
