@@ -38,15 +38,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Create .env
+      - name: Create .env in project root
+        working-directory: ./uploading_files_to_server
         run: |
-          echo "SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }}" > .env
-          echo "DEBUG=False" >> .env
-          echo "DB_NAME=uploading_files_db" >> .env
-          echo "DB_USER=postgres" >> .env
-          echo "DB_PASSWORD=postgres" >> .env
-          echo "DB_HOST=localhost" >> .env
-          echo "DB_PORT=5432" >> .env
+          cat > .env <<EOF
+          SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }}
+          DEBUG=False
+          DB_NAME=uploading_files_db
+          DB_USER=postgres
+          DB_PASSWORD=postgres
+          DB_HOST=localhost
+          DB_PORT=5432
+          EOF
 
       - name: Set up Python
         uses: actions/setup-python@v5
