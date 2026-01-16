@@ -71,7 +71,6 @@ jobs:
         run: |
           poetry run pytest users/tests.py -v
 
-
   build:
     needs: test
     runs-on: ubuntu-latest
