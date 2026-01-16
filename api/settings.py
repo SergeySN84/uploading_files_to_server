@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 import os
 import sys
 
-from django.core.exceptions import ImproperlyConfigured
+# from django.core.exceptions import ImproperlyConfigured
 
 from dotenv import load_dotenv
 from pathlib import Path
