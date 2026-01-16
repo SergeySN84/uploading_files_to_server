@@ -98,9 +98,7 @@ jobs:
       - name: Build Docker image (dry-run or local build)
         run: |
           docker-compose config
-          echo "✅ Docker Compose configuration is valid"
-          # Опционально: можно собрать образ локально для проверки
-          # docker-compose build
+          echo "Docker Compose configuration is valid"
 
   deploy:
     needs: build
