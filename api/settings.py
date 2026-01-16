@@ -14,7 +14,8 @@ import os
 import sys
 
 from django.core.exceptions import ImproperlyConfigured
-#from dotenv import load_dotenv
+
+# from dotenv import load_dotenv
 from pathlib import Path
 from datetime import timedelta
 
