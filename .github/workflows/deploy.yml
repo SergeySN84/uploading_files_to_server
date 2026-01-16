@@ -106,14 +106,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Build Docker image (dry-run or local build)
-        run: |
-          docker-compose config
-          echo "Docker Compose configuration is valid"
+      - name: Set up Docker Compose
+        uses: docker/setup-compose-action@v3
+      - name: Validate docker-compose.yml
+        run: docker-compose config
 
   deploy:
     needs: build
