@@ -38,8 +38,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Create .env in project root
-        working-directory: ./uploading_files_to_server
+      - name: Create .env file
         run: |
           cat > .env <<EOF
           SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }}
