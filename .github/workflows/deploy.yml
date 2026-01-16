@@ -38,12 +38,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Create .env file
+      - name: Create .env
         run: |
-          cat > .env <<EOF
-          SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }}
-          DEBUG=False
-          EOF
+          echo "SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }}" > .env
+          echo "DEBUG=False" >> .env
+          echo "DB_NAME=uploading_files_db" >> .env
+          echo "DB_USER=postgres" >> .env
+          echo "DB_PASSWORD=postgres" >> .env
+          echo "DB_HOST=localhost" >> .env
+          echo "DB_PORT=5432" >> .env
 
       - name: Set up Python
         uses: actions/setup-python@v5
