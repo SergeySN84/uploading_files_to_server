@@ -107,6 +107,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Create .env for Docker Compose
+        run: |
+          cat > .env <<EOF
+          SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }}
+          DB_NAME=uploading_files_db
+          DB_USER=postgres
+          DB_PASSWORD=postgres
+          EOF
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
