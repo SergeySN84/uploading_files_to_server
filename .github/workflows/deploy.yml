@@ -81,11 +81,10 @@ jobs:
         run: |
           poetry run python manage.py migrate
         env:
-          SECRET_KEY: 'django-insecure-qj$e77!j2km6av)6k+gmi!_#+##zj(ju7pjfe58jf^s%8o8q-n'
-          ALLOWED_HOSTS: "localhost"
+          SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
           DB_NAME: uploading_files_db
           DB_USER: postgres
-          DB_PASSWORD: 12345
+          DB_PASSWORD: postgres
           DB_HOST: localhost
           DB_PORT: 5432
 
@@ -93,11 +92,10 @@ jobs:
         run: |
           poetry run pytest users/tests.py -v
         env:
-          SECRET_KEY: 'django-insecure-qj$e77!j2km6av)6k+gmi!_#+##zj(ju7pjfe58jf^s%8o8q-n'
-          ALLOWED_HOSTS: "localhost"
+          SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
           DB_NAME: uploading_files_db
           DB_USER: postgres
-          DB_PASSWORD: 12345
+          DB_PASSWORD: postgres
           DB_HOST: localhost
           DB_PORT: 5432
 
