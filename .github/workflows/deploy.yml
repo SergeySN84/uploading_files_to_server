@@ -84,7 +84,7 @@ jobs:
           SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
           DB_NAME: uploading_files_db
           DB_USER: postgres
-          DB_PASSWORD: postgres
+          DB_PASSWORD: 12345
           DB_HOST: localhost
           DB_PORT: 5432
 
@@ -95,7 +95,7 @@ jobs:
           SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
           DB_NAME: uploading_files_db
           DB_USER: postgres
-          DB_PASSWORD: postgres
+          DB_PASSWORD: 12345
           DB_HOST: localhost
           DB_PORT: 5432
 
@@ -111,7 +111,7 @@ jobs:
           SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }}
           DB_NAME=uploading_files_db
           DB_USER=postgres
-          DB_PASSWORD=postgres
+          DB_PASSWORD=12345
           EOF
 
       - name: Set up Docker Buildx
