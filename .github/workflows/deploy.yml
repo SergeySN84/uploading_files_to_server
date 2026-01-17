@@ -139,7 +139,7 @@ jobs:
       - name: Deploy to remote server
         run: |
           ssh -o StrictHostKeyChecking=no test@84.252.141.96 '
-            cd /home/test/uploading-files-to-server &&
+            cd ${{ secrets.DEPLOY_DIR }} &&
             git pull origin main &&
             docker-compose down &&
             docker-compose up --build -d &&
