@@ -141,8 +141,5 @@ jobs:
           ssh -o StrictHostKeyChecking=no test@84.252.141.96 '
             cd /home/test/uploading-files-to-server &&
             git pull origin main &&
-            docker-compose down -v &&
-            docker network prune -f &&
-            docker volume prune -f &&
-            docker-compose up --build -d
+            docker-compose up --build -d --force-recreate
           '
