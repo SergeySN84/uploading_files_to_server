@@ -114,9 +114,29 @@ DJANGO_SECRET_KEY - сгенерированный ключ для тестов
 # После деплоя откройте:
 ```bash
 API: http://84.252.141.96/api/
-Swagger UI: http://84.252.141.96/schema/swagger-ui/
+Swagger UI: http://84.252.141.96/api/docs/
 ```
 Если видите ошибку 502 Bad Gateway:
 
 Проверьте, что .env.prod содержит ALLOWED_HOSTS=84.252.141.96
 Убедитесь, что контейнеры запущены: docker-compose -f docker-compose.prod.yml ps
+
+# Запуск Frontend-теста:
+
+## Требуемые версии:
+- Python 3.12+
+- Django 6.0.1
+- PostgreSQL 15+
+- Docker 24.0+
+- Poetry 2.0+
+- ChromeDriver совместимый с установленным Chrome (для Selenium)
+
+Запуск теста на frontend часть при локальном запуске, запускаем в двух терминалах,
+в первом запускаем
+```bash
+poetry run python manage.py runserver,
+```
+а во втором запускал сам тест
+```bash
+poetry run pytest frontend_tests/ -v
+```
